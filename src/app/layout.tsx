@@ -20,11 +20,13 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${geist.variable}`}>
-      <body>
-        <Navbar/>
-        {children}
-      </body>
-    </html>
+    <ClerkProvider>
+      <html lang="en" className={`${geist.variable}`}>
+        <body>
+          <Navbar/>
+          {children}
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }

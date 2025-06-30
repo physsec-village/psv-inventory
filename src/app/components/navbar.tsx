@@ -1,6 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import {
+  SignInButton,
+  SignedIn,
+  SignedOut,
+  UserButton,
+} from '@clerk/nextjs'
+
 export default function Navbar(){
     return (<>
         <div className="flex flex-col px-6 py-6 gap-2">
@@ -15,7 +22,14 @@ export default function Navbar(){
                     />
                     <div className="text-3xl">PSV Inventory</div>
                 </div>
-                <div id="login">lele</div>
+            <div>
+                <SignedOut>
+                    <SignInButton />
+                </SignedOut>
+                <SignedIn>
+                    <UserButton />
+                </SignedIn>
+            </div>
             </div>
             <div id="navbar-bottom">
                 <nav>
