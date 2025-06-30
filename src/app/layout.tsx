@@ -3,6 +3,8 @@ import "~/styles/globals.css";
 import { type Metadata } from "next";
 import { Geist } from "next/font/google";
 
+import Navbar from "./components/navbar";
+
 export const metadata: Metadata = {
   title: "PSV Inventory",
   description: "Inventory management app for PSV",
@@ -19,7 +21,10 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className={`${geist.variable}`}>
-      <body>{children}</body>
+      <body>
+        <Navbar/>
+        {children}
+      </body>
     </html>
   );
 }
