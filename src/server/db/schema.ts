@@ -6,7 +6,6 @@ export type cost_per_unit_detail = {
         labour: number,
         material: number,
     },
-    other?: any
 }
 
 export const items = pgTable("items", {
