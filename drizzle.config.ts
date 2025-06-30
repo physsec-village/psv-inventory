@@ -8,5 +8,5 @@ export default {
   dbCredentials: {
     url: env.DATABASE_URL,
   },
-  tablesFilter: ["psv-inventory_*"],
+  // tablesFilter: ["psv-inventory_*"],
 } satisfies Config;
