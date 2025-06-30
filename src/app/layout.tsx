@@ -4,11 +4,12 @@ import { type Metadata } from "next";
 import { Geist } from "next/font/google";
 
 import Navbar from "./components/navbar";
+import { ClerkProvider } from "@clerk/nextjs";
 
 export const metadata: Metadata = {
   title: "PSV Inventory",
   description: "Inventory management app for PSV",
-  // icons: [{ rel: "icon", url: "/favicon.ico" }],
+  icons: [{ rel: "icon", url: "/favicon.ico" }],
 };
 
 const geist = Geist({
