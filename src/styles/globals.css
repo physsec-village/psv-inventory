@@ -12,3 +12,11 @@ a{
 button[component=SignInButton]{
   cursor: pointer;
 }
+
+td, th{
+  border: 1pt solid black;
+}
+
+main{
+  margin-inline: calc(var(--spacing) * 6)
+}
