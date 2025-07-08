@@ -1,48 +1,45 @@
-import { containers, inventory, items, locations } from "~/server/db/schema";
+"use client"
 
-import { ButtonPrimary } from "../components/buttons";
+import { useState } from "react"
+import { InventoryTable } from "~/components/inventory-table"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "~/components/ui/card"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/components/ui/tabs"
+import { InventoryActions } from "~/components/inventory-actions"
 
-import { db } from "~/server/db";
-import { eq } from "drizzle-orm";
-import { NewInventoryMoveBtnAndForm } from "../components/inventorymove";
+export default function InventoryPage() {
+  const [viewMode, setViewMode] = useState<"lot" | "container">("lot")
 
-export default async function InventoryPage() {
-    const result = await db.select().from(inventory)
-        .fullJoin(items, eq(items.id, inventory.item_id))
-        .fullJoin(containers, eq(containers.id, inventory.container_id))
-        .fullJoin(locations, eq(locations.id, containers.location_id))
-        .orderBy(locations.name)
-    return (
+  return (
     <main>
-        <table>
-        <thead>
-            <tr>
-                <th>Location</th>
-                <th>Container</th>
-                <th>SKU</th>
-                <th>Lot ID</th>
-                <th>Description</th>
-                <th>Qty</th>
-                <th>Cost/unit</th>
-            </tr>
-        </thead>
-            <tbody>
-                {result.map((lot)=>(
-                    <tr key={lot.inventory?.lot_id}>
-                        <td>{lot.locations?.name}</td>
-                        <td>{lot.containers?.id}</td>
-                        <td>{lot.items?.code}</td>
-                        <td>{lot.inventory?.lot_id}</td>
-                        <td>{lot.items?.description}</td>
-                        <td>{lot.inventory?.quantity}</td>
-                        <td>{lot.inventory?.cost_per_unit}</td>
-                    </tr>
-                ))}
-            </tbody>
-        </table>
-        <p>
-            <NewInventoryMoveBtnAndForm />
-        </p>
+        <div className="space-y-6">
+          <div className="flex items-center justify-between">
+            <div>
+              <h1 className="text-3xl font-bold tracking-tight">Inventory Management</h1>
+              <p className="text-muted-foreground">Manage your inventory lots and containers</p>
+            </div>
+            <InventoryActions />
+          </div>
+          <Card>
+            <CardHeader>
+              <CardTitle>Inventory Overview</CardTitle>
+              <CardDescription>View and manage your inventory by lot or container</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <Tabs value={viewMode} onValueChange={(value) => setViewMode(value as "lot" | "container")}>
+                <TabsList className="grid w-full grid-cols-2">
+                  <TabsTrigger value="lot">By Lot</TabsTrigger>
+                  <TabsTrigger value="container">By Container</TabsTrigger>
+                </TabsList>
+                <TabsContent value="lot" className="mt-6">
+                  <InventoryTable viewMode="lot" />
+                </TabsContent>
+                <TabsContent value="container" className="mt-6">
+                  <InventoryTable viewMode="container" />
+                </TabsContent>
+              </Tabs>
+            </CardContent>
+          </Card>
+        </div>
     </main>
-    );
+  )
 }

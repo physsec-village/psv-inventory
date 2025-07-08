@@ -3,7 +3,7 @@ import "~/styles/globals.css";
 import { type Metadata } from "next";
 import { Geist } from "next/font/google";
 
-import Navbar from "./components/navbar";
+import Navbar from "../components/navbar";
 import { ClerkProvider } from "@clerk/nextjs";
 
 export const metadata: Metadata = {
