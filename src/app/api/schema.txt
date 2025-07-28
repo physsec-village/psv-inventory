@@ -1,0 +1,30 @@
+## Items (as in, the types of things we keep track of)
+
+GET /api/items/:id:
+Get information about a given item by id
+
+PUT /api/items/:id:
+Update item information by id
+
+GET /api/items/search?[any=<query>][<field>=<query>]
+Search for a given item by field, or by any field. Multiple queries are AND'ed
+
+POST /api/items/new
+Create a new item, response will include the id for it
+
+DELETE /api/items/:id:
+Delete item by given id. If it has ever been used, this will return an error. Use PUT and set `active` to false instead
+
+
+## Containers
+POST /api/containers/new
+Create a new container, response will include the id for it
+
+PUT /api/containers/:id:
+Update container information. Mostly used to move containers to a new location
+
+GET /api/containers/:id:
+Get information for given container
+
+DELETE /api/containers/:id:
+Delete container by given id. If it has ever been used, this will return an error. Use PUT and set `active` to false instead
