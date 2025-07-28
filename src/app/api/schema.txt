@@ -26,5 +26,25 @@ Update container information. Mostly used to move containers to a new location
 GET /api/containers/:id:
 Get information for given container
 
+GET /api/container/search[any=<query>][<field>=<query>]
+Search for a given container by field, or by any field. Multiple queries are AND'ed
+
 DELETE /api/containers/:id:
 Delete container by given id. If it has ever been used, this will return an error. Use PUT and set `active` to false instead
+
+
+## Locations
+POST /api/locations/new
+Create a new location, response will include the id for it
+
+PUT /api/locations/:id:
+Update information for a given location by id
+
+GET /api/locations/:id:
+Get information for a given location
+
+GET /api/locations/search[any=<query>][<field>=<query>]
+Search for a given location by field, or by any field. Multiple queries are AND'ed
+
+DELETE /api/locations/:id:
+Delete location by given id. If it has ever been used, this will return an error. Use PUT and set `active` to false instead
