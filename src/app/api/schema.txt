@@ -17,6 +17,7 @@ Delete item by given id. If it has ever been used, this will return an error. Us
 
 
 ## Containers
+
 POST /api/containers/new
 Create a new container, response will include the id for it
 
@@ -32,8 +33,12 @@ Search for a given container by field, or by any field. Multiple queries are AND
 DELETE /api/containers/:id:
 Delete container by given id. If it has ever been used, this will return an error. Use PUT and set `active` to false instead
 
+GET /api/containers/location/:id:
+Get containers at location by location id
+
 
 ## Locations
+
 POST /api/locations/new
 Create a new location, response will include the id for it
 
@@ -43,8 +48,28 @@ Update information for a given location by id
 GET /api/locations/:id:
 Get information for a given location
 
-GET /api/locations/search[any=<query>][<field>=<query>]
+GET /api/locations/search?[any=<query>][<field>=<query>]
 Search for a given location by field, or by any field. Multiple queries are AND'ed
 
 DELETE /api/locations/:id:
 Delete location by given id. If it has ever been used, this will return an error. Use PUT and set `active` to false instead
+
+## Inventory (as in, the actual physical stuff)
+
+PUT /api/inventory/:id:
+Change something about a given lot by id
+
+GET /api/inventory/:id:
+Get information about given lot by id
+
+DELETE /api/inventory/:id:
+Delete given lot by id. This should normally not be used. Use PUT and set `active` to false instead
+
+GET /api/inventory/location/:id:
+Get inventory at a given location by id, grouped by container
+
+GET /api/inventory/location/:id:/items
+Get inventory at a given location by id, grouped by container. Return full join with `items` (so basically, include item info in result instead of just item id.)
+
+GET /api/inventory/search?[any=<query>][<field>=<query>]
+Search for a given lot by field, or by any field. Multiple queries are AND'ed
